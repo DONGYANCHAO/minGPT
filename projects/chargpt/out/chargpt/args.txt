@@ -1,0 +1,1 @@
+chargpt.py --trainer.max_iters=25 --trainer.num_workers=0
