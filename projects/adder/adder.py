@@ -11,7 +11,7 @@ from torch.utils.data import Dataset
 from torch.utils.data.dataloader import DataLoader
 
 from mingpt.model import GPT
-from mingpt.trainer import Trainer
+from mingpt.trainer import Trainer, CallbackEvent
 from mingpt.utils import set_seed, setup_logging, CfgNode as CN
 
 # -----------------------------------------------------------------------------
@@ -201,7 +201,7 @@ if __name__ == '__main__':
             # revert model to training mode
             model.train()
 
-    trainer.set_callback('on_batch_end', batch_end_callback)
+    trainer.set_callback(CallbackEvent.ON_BATCH_END, batch_end_callback)
 
     # run the optimization
     trainer.run()
