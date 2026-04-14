@@ -1,0 +1,21 @@
+{
+  "run_name": "test_run",
+  "start_time": 1776087384.9041152,
+  "current_step": 100,
+  "metrics": {
+    "loss": [
+      {
+        "step": 100,
+        "value": 0.5,
+        "timestamp": 1776087384.9049094
+      }
+    ],
+    "accuracy": [
+      {
+        "step": 100,
+        "value": 0.95,
+        "timestamp": 1776087384.9049094
+      }
+    ]
+  }
+}

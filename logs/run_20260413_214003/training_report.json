@@ -1,0 +1,9 @@
+{
+  "run_name": "run_20260413_214003",
+  "total_steps": 100,
+  "training_duration": 0.9966819286346436,
+  "final_metrics": {
+    "train/loss": 1.6558977365493774,
+    "train/learning_rate": 0.0005,
+    "train/iter_time": 0.008862972259521484,
+    "eval/train_accuracy": 

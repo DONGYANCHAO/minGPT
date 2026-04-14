@@ -1,0 +1,19 @@
+{
+  "run_name": "run_20260413_214025",
+  "total_steps": 490,
+  "training_duration": 3.9260897636413574,
+  "final_metrics": {
+    "train/loss": 1.5096689462661743,
+    "train/learning_rate": 0.0005,
+    "train/iter_time": 0.008620738983154297,
+    "eval/train_accuracy": 1.4000000953674316,
+    "eval/test_accuracy": 0.6000000238418579
+  },
+  "best_metrics": {
+    "train/loss": 1.4915424585342407,
+    "train/learning_rate": 0.0005,
+    "train/iter_time": 0.012274503707885742,
+    "eval/train_accuracy": 1.600000023841858,
+    "eval/test_accuracy": 1.600000023841858
+  }
+}

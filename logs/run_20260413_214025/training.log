@@ -1,0 +1,7 @@
+2026-04-13 21:40:25,214 - INFO - Starting training...
+2026-04-13 21:40:25,240 - INFO - Resumed from checkpoint at iteration 100
+2026-04-13 21:40:25,256 - INFO - iter 100: loss 1.663955, time 0.00ms
+2026-04-13 21:40:26,265 - INFO - iter 200: loss 1.558407, time 9.84ms
+2026-04-13 21:40:27,243 - INFO - iter 300: loss 1.544549, time 7.27ms
+2026-04-13 21:40:28,165 - INFO - iter 400: loss 1.541317, time 9.37ms
+2026-04-13 21:40:29,137 - INFO - Training report saved to: ./logs\run_20260413_214025\training_report.json

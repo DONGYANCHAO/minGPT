@@ -1,0 +1,30 @@
+{
+  "checkpoints": [
+    {
+      "path": "./checkpoints\\run_20260414_100406\\checkpoint_iter_0.pt",
+      "iter_num": 0,
+      "metrics": {
+        "loss": 2.314535617828369
+      },
+      "timestamp": "2026-04-14T10:04:09.926001"
+    },
+    {
+      "path": "./checkpoints\\run_20260414_100406\\checkpoint_iter_100.pt",
+      "iter_num": 100,
+      "metrics": {
+        "loss": 1.634608268737793
+      },
+      "timestamp": "2026-04-14T10:04:10.968025"
+    }
+  ],
+  "best_checkpoint": {
+    "path": "./checkpoints\\run_20260414_100406\\best_model.pt",
+    "iter_num": 100,
+    "metrics": {
+      "loss": 1.634608268737793
+    },
+    "metric_value": 1.634608268737793,
+    "timestamp": "2026-04-14T10:04:10.968025"
+  },
+  "updated_at": "2026-04-14T10:04:10.973988"
+}
