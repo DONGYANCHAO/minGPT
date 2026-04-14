@@ -1,0 +1,5 @@
+{"timestamp": "2026-04-14T10:25:41.085327", "iter_num": 10, "metrics": {"loss": 4.605260848999023}, "extra": {"learning_rate": 0.0003, "iter_time": 0.011641979217529297}}
+{"timestamp": "2026-04-14T10:25:41.239713", "iter_num": 20, "metrics": {"loss": 4.597221374511719}, "extra": {"learning_rate": 0.0003, "iter_time": 0.013616561889648438}}
+{"timestamp": "2026-04-14T10:25:41.415893", "iter_num": 30, "metrics": {"loss": 4.601065158843994}, "extra": {"learning_rate": 0.0003, "iter_time": 0.013115406036376953}}
+{"timestamp": "2026-04-14T10:25:41.571240", "iter_num": 40, "metrics": {"loss": 4.585005283355713}, "extra": {"learning_rate": 0.0003, "iter_time": 0.01499629020690918}}
+{"timestamp": "2026-04-14T10:25:41.757924", "iter_num": 50, "metrics": {"loss": 4.586934566497803}, "extra": {"learning_rate": 0.0003, "iter_time": 0.014218330383300781}}

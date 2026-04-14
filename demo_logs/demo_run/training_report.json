@@ -1,0 +1,35 @@
+{
+  "run_name": "demo_run",
+  "total_steps": 10,
+  "elapsed_time_seconds": 0.0010807514190673828,
+  "elapsed_time_formatted": "00:00:00",
+  "metrics_summary": {
+    "train/loss": {
+      "min": 0.11,
+      "max": 1.01,
+      "mean": 0.30289682539682533,
+      "last": 0.11
+    },
+    "train/learning_rate": {
+      "min": 0.00017962108177151359,
+      "max": 0.000285,
+      "mean": 0.00022871994463412396,
+      "last": 0.00017962108177151359
+    },
+    "train/iter_time_ms": {
+      "min": 50.0,
+      "max": 500.0,
+      "mean": 275.0,
+      "last": 500.0
+    }
+  },
+  "config": {
+    "log_dir": "./demo_logs",
+    "log_level": "INFO",
+    "log_to_file": true,
+    "log_to_json": true,
+    "use_tensorboard": true,
+    "use_wandb": false,
+    "log_interval": 2
+  }
+}

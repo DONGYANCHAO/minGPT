@@ -1,0 +1,10 @@
+2026-04-13 21:41:16 | INFO | Starting training...
+2026-04-13 21:41:18 | INFO | Step 5 | Loss: 2.70793 | LR: 5.00e-04 | Iter: 48.34ms | Elapsed: 0.0min
+2026-04-13 21:41:18 | INFO | Step 10 | Loss: 2.51189 | LR: 5.00e-04 | Iter: 15.76ms | Elapsed: 0.0min
+2026-04-13 21:41:18 | INFO | Checkpoint saved at iteration 10
+2026-04-13 21:41:18 | INFO | Step 15 | Loss: 2.40734 | LR: 5.00e-04 | Iter: 14.02ms | Elapsed: 0.0min
+2026-04-13 21:41:18 | INFO | Step 20 | Loss: 2.28626 | LR: 5.00e-04 | Iter: 24.53ms | Elapsed: 0.1min
+2026-04-13 21:41:18 | INFO | Checkpoint saved at iteration 20
+2026-04-13 21:41:18 | INFO | Training completed!
+2026-04-13 21:41:18 | INFO | Training report saved to demo_logs\integrated_demo\training_report.json
+2026-04-13 21:41:18 | INFO | Training report saved. Total steps: 20

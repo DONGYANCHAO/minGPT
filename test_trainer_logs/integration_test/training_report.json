@@ -1,0 +1,19 @@
+{
+  "experiment_name": "integration_test",
+  "start_time": "2026-04-14T10:25:40.943314",
+  "end_time": "2026-04-14T10:25:41.766396",
+  "total_time_seconds": 0.8230712413787842,
+  "total_iterations": 50,
+  "final_metrics": {
+    "loss": 4.586934566497803
+  },
+  "best_metrics": {
+    "loss": {
+      "min_value": 4.585005283355713,
+      "min_at_iter": 40,
+      "max_value": 4.605260848999023,
+      "max_at_iter": 10
+    }
+  },
+  "iterations_per_second": 60.74808289528073
+}

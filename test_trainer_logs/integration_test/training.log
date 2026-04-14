@@ -1,0 +1,15 @@
+2026-04-14 10:22:38 | INFO | iter 10 | elapsed 0.15s | loss: 4.607674 | learning_rate: 0.0003 | iter_time: 0.013365030288696289
+2026-04-14 10:22:38 | INFO | iter 20 | elapsed 0.30s | loss: 4.604702 | learning_rate: 0.0003 | iter_time: 0.013433694839477539
+2026-04-14 10:22:38 | INFO | iter 30 | elapsed 0.47s | loss: 4.597733 | learning_rate: 0.0003 | iter_time: 0.011757135391235352
+2026-04-14 10:22:38 | INFO | iter 40 | elapsed 0.59s | loss: 4.596372 | learning_rate: 0.0003 | iter_time: 0.011253833770751953
+2026-04-14 10:22:38 | INFO | iter 50 | elapsed 0.75s | loss: 4.573810 | learning_rate: 0.0003 | iter_time: 0.01161956787109375
+2026-04-14 10:24:31 | INFO | iter 10 | elapsed 0.14s | loss: 4.597445 | learning_rate: 0.0003 | iter_time: 0.013471841812133789
+2026-04-14 10:24:31 | INFO | iter 20 | elapsed 0.27s | loss: 4.606813 | learning_rate: 0.0003 | iter_time: 0.011701345443725586
+2026-04-14 10:24:31 | INFO | iter 30 | elapsed 0.45s | loss: 4.586162 | learning_rate: 0.0003 | iter_time: 0.014028787612915039
+2026-04-14 10:24:31 | INFO | iter 40 | elapsed 0.58s | loss: 4.565409 | learning_rate: 0.0003 | iter_time: 0.01397562026977539
+2026-04-14 10:24:31 | INFO | iter 50 | elapsed 0.75s | loss: 4.581594 | learning_rate: 0.0003 | iter_time: 0.012513399124145508
+2026-04-14 10:25:41 | INFO | iter 10 | elapsed 0.14s | loss: 4.605261 | learning_rate: 0.0003 | iter_time: 0.011641979217529297
+2026-04-14 10:25:41 | INFO | iter 20 | elapsed 0.30s | loss: 4.597221 | learning_rate: 0.0003 | iter_time: 0.013616561889648438
+2026-04-14 10:25:41 | INFO | iter 30 | elapsed 0.47s | loss: 4.601065 | learning_rate: 0.0003 | iter_time: 0.013115406036376953
+2026-04-14 10:25:41 | INFO | iter 40 | elapsed 0.63s | loss: 4.585005 | learning_rate: 0.0003 | iter_time: 0.01499629020690918
+2026-04-14 10:25:41 | INFO | iter 50 | elapsed 0.81s | loss: 4.586935 | learning_rate: 0.0003 | iter_time: 0.014218330383300781

@@ -1,0 +1,22 @@
+{
+  "checkpoints": [
+    {
+      "path": "./checkpoints\\run_20260414_101948\\checkpoint_iter_0.pt",
+      "iter_num": 0,
+      "metrics": {
+        "loss": 2.314535617828369
+      },
+      "timestamp": "2026-04-14T10:19:52.185318"
+    }
+  ],
+  "best_checkpoint": {
+    "path": "./checkpoints\\run_20260414_101948\\best_model.pt",
+    "iter_num": 0,
+    "metrics": {
+      "loss": 2.314535617828369
+    },
+    "metric_value": 2.314535617828369,
+    "timestamp": "2026-04-14T10:19:52.185318"
+  },
+  "updated_at": "2026-04-14T10:19:52.193372"
+}

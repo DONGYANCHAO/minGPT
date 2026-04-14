@@ -1,0 +1,39 @@
+{
+  "run_name": "integrated_demo",
+  "total_steps": 20,
+  "elapsed_time_seconds": 3.1114957332611084,
+  "elapsed_time_formatted": "00:00:03",
+  "metrics_summary": {
+    "train/loss": {
+      "min": 2.281691312789917,
+      "max": 2.987852096557617,
+      "mean": 2.543148946762085,
+      "last": 2.2862582206726074
+    },
+    "train/learning_rate": {
+      "min": 0.0005,
+      "max": 0.0005,
+      "mean": 0.0005000000000000001,
+      "last": 0.0005
+    },
+    "train/iter_time_ms": {
+      "min": 13.301610946655273,
+      "max": 2345.6826210021973,
+      "mean": 154.0252447128296,
+      "last": 24.526119232177734
+    }
+  },
+  "config": {
+    "log_dir": "./demo_logs",
+    "log_level": "INFO",
+    "log_to_file": true,
+    "log_to_json": true,
+    "use_tensorboard": true,
+    "use_wandb": false,
+    "wandb_project": "mingpt",
+    "wandb_entity": null,
+    "tensorboard_port": 6006,
+    "log_interval": 5,
+    "sample_interval": 500
+  }
+}

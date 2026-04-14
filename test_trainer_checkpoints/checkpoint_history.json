@@ -1,0 +1,18 @@
+[
+  {
+    "filename": "checkpoint_iter_40_20260414_102541.pt",
+    "iter_num": 40,
+    "timestamp": "20260414_102541",
+    "metrics": {
+      "loss": 4.585005283355713
+    }
+  },
+  {
+    "filename": "checkpoint_iter_50_20260414_102541.pt",
+    "iter_num": 50,
+    "timestamp": "20260414_102541",
+    "metrics": {
+      "loss": 4.586934566497803
+    }
+  }
+]

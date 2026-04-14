@@ -1,0 +1,17 @@
+============================================================
+Training Report: integration_test
+============================================================
+
+Start Time: 2026-04-14T10:25:40.943314
+End Time: 2026-04-14T10:25:41.766396
+Total Time: 0.82 seconds
+Total Iterations: 50
+Iterations/Second: 60.75
+
+Final Metrics:
+  loss: 4.586935
+
+Best Metrics:
+  loss:
+    Min: 4.585005 (iter 40)
+    Max: 4.605261 (iter 10)

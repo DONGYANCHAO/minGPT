@@ -1,0 +1,10 @@
+{"step": 1, "timestamp": "2026-04-13T21:41:15.789170", "metrics": {"train_loss": 1.01, "train_learning_rate": 0.000285, "train_iter_time_ms": 50.0}}
+{"step": 2, "timestamp": "2026-04-13T21:41:15.789252", "metrics": {"train_loss": 0.52, "train_learning_rate": 0.00027074999999999994, "train_iter_time_ms": 100.0}}
+{"step": 3, "timestamp": "2026-04-13T21:41:15.789515", "metrics": {"train_loss": 0.3333333333333333, "train_learning_rate": 0.00025721249999999994, "train_iter_time_ms": 150.00000000000003}}
+{"step": 4, "timestamp": "2026-04-13T21:41:15.789547", "metrics": {"train_loss": 0.26, "train_learning_rate": 0.00024435187499999994, "train_iter_time_ms": 200.0}}
+{"step": 5, "timestamp": "2026-04-13T21:41:15.789678", "metrics": {"train_loss": 0.22, "train_learning_rate": 0.0002321342812499999, "train_iter_time_ms": 250.0}}
+{"step": 6, "timestamp": "2026-04-13T21:41:15.789771", "metrics": {"train_loss": 0.16666666666666666, "train_learning_rate": 0.0002205275671874999, "train_iter_time_ms": 300.00000000000006}}
+{"step": 7, "timestamp": "2026-04-13T21:41:15.789891", "metrics": {"train_loss": 0.15285714285714286, "train_learning_rate": 0.0002095011888281249, "train_iter_time_ms": 350.00000000000006}}
+{"step": 8, "timestamp": "2026-04-13T21:41:15.789909", "metrics": {"train_loss": 0.145, "train_learning_rate": 0.00019902612938671867, "train_iter_time_ms": 400.0}}
+{"step": 9, "timestamp": "2026-04-13T21:41:15.789999", "metrics": {"train_loss": 0.1111111111111111, "train_learning_rate": 0.00018907482291738271, "train_iter_time_ms": 450.0}}
+{"step": 10, "timestamp": "2026-04-13T21:41:15.790014", "metrics": {"train_loss": 0.11, "train_learning_rate": 0.00017962108177151359, "train_iter_time_ms": 500.0}}
