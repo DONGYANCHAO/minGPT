@@ -1,0 +1,54 @@
+{
+  "checkpoints": [
+    {
+      "path": "./checkpoints\\run_20260414_103604\\checkpoint_iter_19800.pt",
+      "iter_num": 19800,
+      "metrics": {
+        "loss": 0.0012081559980288148
+      },
+      "timestamp": "2026-04-14T10:40:04.013754"
+    },
+    {
+      "path": "./checkpoints\\run_20260414_103604\\checkpoint_iter_19900.pt",
+      "iter_num": 19900,
+      "metrics": {
+        "loss": 0.001458286656998098
+      },
+      "timestamp": "2026-04-14T10:40:05.043664"
+    },
+    {
+      "path": "./checkpoints\\run_20260414_103604\\checkpoint_iter_20000.pt",
+      "iter_num": 20000,
+      "metrics": {
+        "loss": 0.0018658257322385907
+      },
+      "timestamp": "2026-04-14T10:40:06.966998"
+    },
+    {
+      "path": "./checkpoints\\run_20260414_103604\\checkpoint_iter_20100.pt",
+      "iter_num": 20100,
+      "metrics": {
+        "loss": 0.052888233214616776
+      },
+      "timestamp": "2026-04-14T10:40:07.995125"
+    },
+    {
+      "path": "./checkpoints\\run_20260414_103604\\checkpoint_iter_20200.pt",
+      "iter_num": 20200,
+      "metrics": {
+        "loss": 0.002006187103688717
+      },
+      "timestamp": "2026-04-14T10:40:09.118815"
+    }
+  ],
+  "best_checkpoint": {
+    "path": "./checkpoints\\run_20260414_103604\\best_model.pt",
+    "iter_num": 19800,
+    "metrics": {
+      "loss": 0.0012081559980288148
+    },
+    "metric_value": 0.0012081559980288148,
+    "timestamp": "2026-04-14T10:40:04.013754"
+  },
+  "updated_at": "2026-04-14T10:40:09.124260"
+}
