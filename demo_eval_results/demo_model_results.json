@@ -1,0 +1,9 @@
+{
+  "task_type": "language_model",
+  "num_samples": 100,
+  "metrics": {
+    "loss": 3.9259283542633057,
+    "perplexity": 50.700123894026106,
+    "accuracy": 0.015625
+  }
+}

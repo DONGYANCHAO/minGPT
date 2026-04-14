@@ -1,0 +1,21 @@
+============================================================
+Training Report: test_run
+============================================================
+
+Start Time: 2026-04-14T10:25:34.799588
+End Time: 2026-04-14T10:25:34.842368
+Total Time: 0.04 seconds
+Total Iterations: 100
+Iterations/Second: 2337.86
+
+Final Metrics:
+  loss: 0.181818
+  accuracy: 0.990000
+
+Best Metrics:
+  loss:
+    Min: 0.181818 (iter 100)
+    Max: 1.818182 (iter 1)
+  accuracy:
+    Min: 0.307000 (iter 1)
+    Max: 0.990000 (iter 99)

@@ -1,0 +1,26 @@
+{
+  "experiment_name": "test_run",
+  "start_time": "2026-04-14T10:25:34.799588",
+  "end_time": "2026-04-14T10:25:34.842368",
+  "total_time_seconds": 0.042774200439453125,
+  "total_iterations": 100,
+  "final_metrics": {
+    "loss": 0.18181818181818182,
+    "accuracy": 0.99
+  },
+  "best_metrics": {
+    "loss": {
+      "min_value": 0.18181818181818182,
+      "min_at_iter": 100,
+      "max_value": 1.8181818181818181,
+      "max_at_iter": 1
+    },
+    "accuracy": {
+      "min_value": 0.307,
+      "min_at_iter": 1,
+      "max_value": 0.99,
+      "max_at_iter": 99
+    }
+  },
+  "iterations_per_second": 2337.8578435744225
+}

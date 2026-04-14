@@ -1,0 +1,54 @@
+{
+  "checkpoints": [
+    {
+      "path": "demo_checkpoints\\checkpoint_iter_20_20260413_214118.pt",
+      "iter_num": 20,
+      "timestamp": "20260413_214118",
+      "metrics": {
+        "loss": 2.2862582206726074,
+        "lr": 0.0005
+      },
+      "is_best": false
+    },
+    {
+      "path": "demo_checkpoints\\checkpoint_iter_20_20260413_214118.pt",
+      "iter_num": 20,
+      "timestamp": "20260413_214118",
+      "metrics": {
+        "loss": 2.2862582206726074
+      },
+      "is_best": false
+    },
+    {
+      "path": "demo_checkpoints\\checkpoint_iter_15_20260413_214115.pt",
+      "iter_num": 15,
+      "timestamp": "20260413_214115",
+      "metrics": {
+        "loss": 0.06666666666666667,
+        "accuracy": 0.95
+      },
+      "is_best": true
+    },
+    {
+      "path": "demo_checkpoints\\checkpoint_iter_14_20260413_214115.pt",
+      "iter_num": 14,
+      "timestamp": "20260413_214115",
+      "metrics": {
+        "loss": 0.07142857142857142,
+        "accuracy": 0.9199999999999999
+      },
+      "is_best": false
+    },
+    {
+      "path": "demo_checkpoints\\checkpoint_iter_13_20260413_214115.pt",
+      "iter_num": 13,
+      "timestamp": "20260413_214115",
+      "metrics": {
+        "loss": 0.07692307692307693,
+        "accuracy": 0.89
+      },
+      "is_best": false
+    }
+  ],
+  "best_metric_value": 0.06666666666666667
+}
