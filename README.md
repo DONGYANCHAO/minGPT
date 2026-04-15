@@ -1,5 +1,19 @@
-
 # minGPT
+
+[![PyPI version](https://badge.fury.io/py/mingpt.svg)](https://badge.fury.io/py/mingpt)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/mingpt.svg)](https://pypi.org/project/mingpt/)
+[![PyPI - License](https://img.shields.io/pypi/l/mingpt.svg)](https://github.com/karpathy/minGPT/blob/main/LICENSE)
+[![PyPI Downloads](https://static.pepy.tech/personalized-badge/mingpt?period=month&units=international_system&left_color=grey&right_color=blue&left_text=downloads/month)](https://pepy.tech/project/mingpt)
+
+[![CI](https://github.com/karpathy/minGPT/workflows/CI/badge.svg)](https://github.com/karpathy/minGPT/actions/workflows/ci.yml)
+[![Publish to PyPI](https://github.com/karpathy/minGPT/workflows/Publish%20to%20PyPI/badge.svg)](https://github.com/karpathy/minGPT/actions/workflows/publish.yml)
+[![codecov](https://codecov.io/gh/karpathy/minGPT/branch/main/graph/badge.svg)](https://codecov.io/gh/karpathy/minGPT)
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
+
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![Imports: isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336)](https://pycqa.github.io/isort/)
+[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
+[![Checked with mypy](https://img.shields.io/badge/mypy-checked-blue)](https://mypy-lang.org/)
 
 ![mingpt](mingpt.jpg)
 
@@ -14,17 +28,51 @@ The minGPT library is three files: [mingpt/model.py](mingpt/model.py) contains t
 - `demo.ipynb` shows a minimal usage of the `GPT` and `Trainer` in a notebook format on a simple sorting example
 - `generate.ipynb` shows how one can load a pretrained GPT2 and generate text given some prompt
 
-### Library Installation
+## Installation
 
-If you want to `import mingpt` into your project:
+### From PyPI
 
+```bash
+pip install mingpt
 ```
+
+### From Source (Development)
+
+```bash
 git clone https://github.com/karpathy/minGPT.git
 cd minGPT
-pip install -e .
 ```
 
-### Usage
+#### Quick Setup (One Command)
+
+**Linux/macOS:**
+```bash
+chmod +x setup.sh
+./setup.sh
+```
+
+**Windows:**
+```cmd
+setup.bat
+```
+
+#### Manual Setup
+
+```bash
+# Create virtual environment
+python -m venv .venv
+source .venv/bin/activate  # Linux/macOS
+# .venv\Scripts\activate   # Windows
+
+# Install in development mode
+pip install -e ".[dev]"
+
+# Install pre-commit hooks
+pre-commit install
+pre-commit install --hook-type pre-push
+```
+
+## Usage
 
 Here's how you'd instantiate a GPT-2 (124M param version):
 
@@ -55,27 +103,144 @@ trainer.run()
 
 See `demo.ipynb` for a more concrete example.
 
-### Unit tests
+## Development
 
-Coverage is not super amazing just yet but:
+### Running Tests
 
+```bash
+# Run all tests
+pytest
+
+# Run tests with coverage
+pytest --cov=mingpt --cov-report=html
+
+# Run specific test file
+pytest tests/test_huggingface_import.py -v
 ```
-python -m unittest discover tests
+
+### Code Quality
+
+```bash
+# Format code
+black .
+
+# Sort imports
+isort .
+
+# Lint code
+ruff check .
+
+# Type check
+mypy mingpt/
+
+# Run all pre-commit hooks
+pre-commit run --all-files
 ```
 
-### todos
+### Version Management
 
-- add gpt-2 finetuning demo on arbitrary given text file
-- add dialog agent demo
-- better docs of outcomes for existing projects (adder, chargpt)
-- add mixed precision and related training scaling goodies
-- distributed training support
-- reproduce some benchmarks in projects/, e.g. text8 or other language modeling
-- proper logging instead of print statement amateur hour haha
-- i probably should have a requirements.txt file...
-- it should be possible to load in many other model weights other than just gpt2-\*
+```bash
+# Bump patch version (0.0.1 -> 0.0.2) - Bug fixes
+bump2version patch
 
-### References
+# Bump minor version (0.0.1 -> 0.1.0) - New features
+bump2version minor
+
+# Bump major version (0.0.1 -> 1.0.0) - Breaking changes
+bump2version major
+```
+
+## Releasing
+
+### Automated Release (Recommended)
+
+1. Bump version:
+   ```bash
+   bump2version patch  # or minor/major
+   ```
+
+2. Push changes and tag:
+   ```bash
+   git push && git push --tags
+   ```
+
+3. GitHub Actions will automatically:
+   - Build the package
+   - Publish to PyPI
+   - Create a GitHub Release
+   - Update CHANGELOG.md
+
+### Manual Release
+
+```bash
+# Build package
+python -m build
+
+# Check package
+twine check dist/*
+
+# Upload to TestPyPI
+twine upload --repository testpypi dist/*
+
+# Upload to PyPI
+twine upload dist/*
+```
+
+## CI/CD Pipeline
+
+This project uses GitHub Actions for continuous integration and deployment:
+
+- **CI Pipeline** ([ci.yml](.github/workflows/ci.yml)):
+  - Multi-version testing (Python 3.8-3.11)
+  - Code formatting checks (black, isort)
+  - Linting (ruff)
+  - Type checking (mypy)
+  - Security scanning (bandit, safety, pip-audit)
+  - Coverage reporting (codecov)
+
+- **Publish Pipeline** ([publish.yml](.github/workflows/publish.yml)):
+  - Triggered by Git tags (v*)
+  - Builds wheel and sdist
+  - Publishes to PyPI/TestPyPI
+  - Creates GitHub Release
+  - Updates CHANGELOG.md
+
+## Pre-commit Hooks
+
+The following hooks are enabled:
+
+| Hook | Description |
+|------|-------------|
+| trailing-whitespace | Removes trailing whitespace |
+| end-of-file-fixer | Ensures files end with newline |
+| check-yaml | Validates YAML files |
+| check-json | Validates JSON files |
+| check-added-large-files | Prevents large files (>500KB) |
+| black | Code formatting |
+| isort | Import sorting |
+| ruff | Linting |
+| mypy | Type checking |
+| nbqa | Jupyter notebook quality checks |
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Make your changes
+4. Run tests and linting (`pytest && pre-commit run --all-files`)
+5. Commit your changes (`git commit -m 'Add amazing feature'`)
+6. Push to the branch (`git push origin feature/amazing-feature`)
+7. Open a Pull Request
+
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md) for a list of changes.
+
+## License
+
+MIT License - see [LICENSE](LICENSE) for details.
+
+## References
 
 Code:
 
@@ -85,7 +250,7 @@ Code:
 
 Papers + some implementation notes:
 
-#### Improving Language Understanding by Generative Pre-Training (GPT-1)
+### Improving Language Understanding by Generative Pre-Training (GPT-1)
 
 - Our model largely follows the original transformer work
 - We trained a 12-layer decoder-only transformer with masked self-attention heads (768 dimensional states and 12 attention heads). For the position-wise feed-forward networks, we used 3072 dimensional inner states.
@@ -101,7 +266,7 @@ Papers + some implementation notes:
 - For finetuning: We add dropout to the classifier with a rate of 0.1. learning rate of 6.25e-5 and a batchsize of 32. 3 epochs. We use a linear learning rate decay schedule with warmup over 0.2% of training. λ was set to 0.5.
 - GPT-1 model is 12 layers and d_model 768, ~117M params
 
-#### Language Models are Unsupervised Multitask Learners (GPT-2)
+### Language Models are Unsupervised Multitask Learners (GPT-2)
 
 - LayerNorm was moved to the input of each sub-block, similar to a pre-activation residual network
 - an additional layer normalization was added after the final self-attention block.
@@ -111,7 +276,7 @@ Papers + some implementation notes:
 - larger batchsize of 512 is used
 - GPT-2 used 48 layers and d_model 1600 (vs. original 12 layers and d_model 768). ~1.542B params
 
-#### Language Models are Few-Shot Learners (GPT-3)
+### Language Models are Few-Shot Learners (GPT-3)
 
 - GPT-3: 96 layers, 96 heads, with d_model of 12,288 (175B parameters).
 - GPT-1-like: 12 layers, 12 heads, d_model 768 (125M)
@@ -126,7 +291,7 @@ Papers + some implementation notes:
 - gradually increase the batch size linearly from a small value (32k tokens) to the full value over the first 4-12 billion tokens of training, depending on the model size.
 - full 2048-sized time context window is always used, with a special END OF DOCUMENT token delimiter
 
-#### Generative Pretraining from Pixels (Image GPT)
+### Generative Pretraining from Pixels (Image GPT)
 
 - When working with images, we pick the identity permutation πi = i for 1 ≤ i ≤ n, also known as raster order.
 - we create our own 9-bit color palette by clustering (R, G, B) pixel values using k-means with k = 512.
@@ -141,7 +306,3 @@ Papers + some implementation notes:
 - We did not use weight decay because applying a small weight decay of 0.01 did not change representation quality.
 - iGPT-S lr 0.003
 - No dropout is used.
-
-### License
-
-MIT

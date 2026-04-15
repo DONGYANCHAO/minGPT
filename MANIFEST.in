@@ -1,0 +1,27 @@
+include LICENSE
+include README.md
+include CHANGELOG.md
+include pyproject.toml
+
+recursive-include mingpt *.py
+recursive-include mingpt *.pyi
+recursive-include mingpt py.typed
+
+recursive-include tests *.py
+
+recursive-include projects *.py
+recursive-include projects *.md
+
+include demo.ipynb
+include generate.ipynb
+include mingpt.jpg
+
+global-exclude __pycache__
+global-exclude *.py[cod]
+global-exclude *.so
+global-exclude .DS_Store
+global-exclude .git*
+global-exclude .mypy_cache
+global-exclude .pytest_cache
+global-exclude .ruff_cache
+global-exclude *.egg-info

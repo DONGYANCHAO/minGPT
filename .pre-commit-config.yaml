@@ -1,0 +1,86 @@
+default_stages: [pre-commit]
+default_language_version:
+  python: python3
+fail_fast: false
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: trailing-whitespace
+        args: [--markdown-linebreak-ext=md]
+      - id: end-of-file-fixer
+      - id: check-yaml
+        args: [--unsafe]
+      - id: check-json
+      - id: check-added-large-files
+        args: ['--maxkb=500']
+      - id: check-merge-conflict
+      - id: check-case-conflict
+      - id: check-docstring-first
+      - id: debug-statements
+      - id: detect-private-key
+      - id: mixed-line-ending
+        args: ['--fix=lf']
+      - id: check-toml
+      - id: check-ast
+      - id: check-executables-have-shebangs
+
+  - repo: https://github.com/psf/black
+    rev: 24.3.0
+    hooks:
+      - id: black
+        language_version: python3
+        args: [--config, pyproject.toml]
+
+  - repo: https://github.com/pycqa/isort
+    rev: 5.13.2
+    hooks:
+      - id: isort
+        args: [--settings-path, pyproject.toml]
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.3.4
+    hooks:
+      - id: ruff
+        args: [--fix, --exit-non-zero-on-fix]
+
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.9.0
+    hooks:
+      - id: mypy
+        additional_dependencies:
+          - types-setuptools
+          - torch
+        args: [--config-file, pyproject.toml]
+        exclude: ^(projects/|tests/|demo\.ipynb|generate\.ipynb)
+
+  - repo: https://github.com/nbQA-dev/nbQA
+    rev: 1.8.5
+    hooks:
+      - id: nbqa-black
+        additional_dependencies: [black==24.3.0]
+      - id: nbqa-isort
+        additional_dependencies: [isort==5.13.2]
+      - id: nbqa-ruff
+        additional_dependencies: [ruff==0.3.4]
+
+  - repo: local
+    hooks:
+      - id: jupyter-notebook-check
+        name: Jupyter Notebook Format Check
+        entry: python -c "import json, sys; f=open(sys.argv[1]); d=json.load(f); assert 'cells' in d, 'Not a valid Jupyter notebook'; assert all('execution_count' in c for c in d.get('cells', []) if c.get('cell_type') == 'code'), 'Missing execution_count in code cells'"
+        language: system
+        files: \.ipynb$
+        pass_filenames: true
+
+ci:
+  autofix_commit_msg: |
+    [pre-commit.ci] auto fixes from pre-commit.com hooks
+    for more information, see https://pre-commit.ci
+  autofix_prs: true
+  autoupdate_branch: ''
+  autoupdate_commit_msg: '[pre-commit.ci] pre-commit autoupdate'
+  autoupdate_schedule: weekly
+  skip: [jupyter-notebook-check]
+  submodules: false
