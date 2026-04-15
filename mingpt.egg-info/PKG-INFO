@@ -1,3 +1,74 @@
+Metadata-Version: 2.4
+Name: mingpt
+Version: 0.0.1
+Summary: A PyTorch re-implementation of GPT, small, clean, interpretable and educational
+Author: Andrej Karpathy
+Author-email: Andrej Karpathy <andrej.karpathy@gmail.com>
+Maintainer: minGPT Contributors
+License: MIT
+Project-URL: Homepage, https://github.com/karpathy/minGPT
+Project-URL: Documentation, https://github.com/karpathy/minGPT#readme
+Project-URL: Repository, https://github.com/karpathy/minGPT.git
+Project-URL: Issues, https://github.com/karpathy/minGPT/issues
+Project-URL: Changelog, https://github.com/karpathy/minGPT/blob/master/CHANGELOG.md
+Project-URL: Bug Tracker, https://github.com/karpathy/minGPT/issues
+Project-URL: Source Code, https://github.com/karpathy/minGPT
+Keywords: deep-learning,pytorch,gpt,transformer,nlp,language-model,machine-learning,ai
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Education
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Classifier: Topic :: Education
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Typing :: Typed
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: torch>=1.9.0
+Requires-Dist: numpy>=1.20.0
+Requires-Dist: tqdm>=4.60.0
+Provides-Extra: dev
+Requires-Dist: pytest>=7.0.0; extra == "dev"
+Requires-Dist: pytest-cov>=4.0.0; extra == "dev"
+Requires-Dist: pytest-xdist>=3.0.0; extra == "dev"
+Requires-Dist: black>=23.0.0; extra == "dev"
+Requires-Dist: isort>=5.12.0; extra == "dev"
+Requires-Dist: ruff>=0.1.0; extra == "dev"
+Requires-Dist: mypy>=1.0.0; extra == "dev"
+Requires-Dist: pre-commit>=3.0.0; extra == "dev"
+Requires-Dist: bandit[toml]>=1.7.0; extra == "dev"
+Requires-Dist: nbstripout>=0.6.0; extra == "dev"
+Requires-Dist: nbqa>=1.7.0; extra == "dev"
+Requires-Dist: autoflake>=2.0.0; extra == "dev"
+Requires-Dist: pyupgrade>=3.0.0; extra == "dev"
+Provides-Extra: docs
+Requires-Dist: sphinx>=5.0.0; extra == "docs"
+Requires-Dist: sphinx-rtd-theme>=1.2.0; extra == "docs"
+Requires-Dist: sphinx-autodoc-typehints>=1.20.0; extra == "docs"
+Requires-Dist: myst-parser>=1.0.0; extra == "docs"
+Provides-Extra: test
+Requires-Dist: pytest>=7.0.0; extra == "test"
+Requires-Dist: pytest-cov>=4.0.0; extra == "test"
+Requires-Dist: pytest-xdist>=3.0.0; extra == "test"
+Requires-Dist: hypothesis>=6.0.0; extra == "test"
+Provides-Extra: all
+Requires-Dist: mingpt[dev,docs,test]; extra == "all"
+Requires-Dist: jupyter>=1.0.0; extra == "all"
+Requires-Dist: matplotlib>=3.5.0; extra == "all"
+Requires-Dist: tensorboard>=2.10.0; extra == "all"
+Requires-Dist: wandb>=0.13.0; extra == "all"
+Dynamic: author
+Dynamic: license-file
+
 
 # minGPT
 

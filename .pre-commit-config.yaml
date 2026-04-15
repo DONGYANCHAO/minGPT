@@ -1,0 +1,303 @@
+# minGPT Pre-commit Configuration
+# 用于代码质量检查和格式化的预提交钩子配置
+
+# 默认设置
+default_language_version:
+  python: python3
+
+default_stages: [pre-commit]
+
+# 文件排除模式
+exclude: >
+  (?x)^(
+    .+\.egg-info/.*|
+    build/.*|
+    dist/.*|
+    \.git/.*|
+    \.tox/.*|
+    \.venv/.*|
+    venv/.*|
+    __pycache__/.*|
+    \.pytest_cache/.*|
+    \.mypy_cache/.*
+  )$
+
+repos:
+  # ==================== 基础文件检查 ====================
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      # 去除行尾空白字符
+      - id: trailing-whitespace
+        name: Trim trailing whitespace
+        args: [--markdown-linebreak-ext=md]
+        stages: [pre-commit]
+
+      # 确保文件以换行符结尾
+      - id: end-of-file-fixer
+        name: Fix end of file
+        stages: [pre-commit]
+
+      # 检查 YAML 文件格式
+      - id: check-yaml
+        name: Check YAML syntax
+        stages: [pre-commit]
+
+      # 检查 JSON 文件格式
+      - id: check-json
+        name: Check JSON syntax
+        stages: [pre-commit]
+
+      # 检查 TOML 文件格式
+      - id: check-toml
+        name: Check TOML syntax
+        stages: [pre-commit]
+
+      # 检查添加的大文件（>500KB）
+      - id: check-added-large-files
+        name: Check for large files
+        args: ['--maxkb=500']
+        stages: [pre-commit]
+
+      # 检查合并冲突标记
+      - id: check-merge-conflict
+        name: Check for merge conflicts
+        stages: [pre-commit]
+
+      # 检查调试语句
+      - id: debug-statements
+        name: Check for debugger
+        stages: [pre-commit]
+
+      # 检查私有密钥
+      - id: detect-private-key
+        name: Detect private keys
+        stages: [pre-commit]
+
+      # 检查 shebang 是否有效
+      - id: check-shebang-scripts-are-executable
+        name: Check shebang scripts
+        stages: [pre-commit]
+
+      # 检查可执行文件是否有 shebang
+      - id: check-executables-have-shebangs
+        name: Check executables have shebangs
+        stages: [pre-commit]
+
+      # 检查字节顺序标记
+      - id: fix-byte-order-marker
+        name: Fix byte order marker
+        stages: [pre-commit]
+
+      # 检查文档字符串首行是否为空
+      - id: check-docstring-first
+        name: Check docstring first
+        stages: [pre-commit]
+
+      # 禁止直接提交到 main/master 分支
+      - id: no-commit-to-branch
+        name: Protect main branches
+        args: ['--branch', 'main', '--branch', 'master']
+        stages: [pre-commit]
+
+  # ==================== Python 代码格式化 ====================
+  # Black - Python 代码格式化工具
+  - repo: https://github.com/psf/black
+    rev: 23.12.1
+    hooks:
+      - id: black
+        name: Black code formatter
+        language_version: python3
+        args:
+          - --line-length=100
+          - --target-version=py38
+          - --target-version=py39
+          - --target-version=py310
+          - --target-version=py311
+        stages: [pre-commit]
+
+  # Black Jupyter - Notebook 代码格式化
+  - repo: https://github.com/psf/black
+    rev: 23.12.1
+    hooks:
+      - id: black-jupyter
+        name: Black Jupyter notebook formatter
+        language_version: python3
+        args:
+          - --line-length=100
+        stages: [pre-commit]
+        files: \.ipynb$
+
+  # ==================== Import 排序 ====================
+  # isort - 自动排序 import 语句
+  - repo: https://github.com/PyCQA/isort
+    rev: 5.13.2
+    hooks:
+      - id: isort
+        name: isort import sorter
+        args:
+          - --profile=black
+          - --line-length=100
+          - --multi-line=3
+          - --trailing-comma
+          - --force-grid-wrap=0
+          - --use-parentheses
+          - --ensure-newline-before-comments
+        stages: [pre-commit]
+
+  # ==================== 代码质量检查 ====================
+  # Ruff - 极速 Python linter（替代 flake8）
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.1.9
+    hooks:
+      # Ruff linter
+      - id: ruff
+        name: Ruff linter
+        args:
+          - --fix
+          - --exit-non-zero-on-fix
+          - --line-length=100
+          - --select=E,W,F,I,N,D,UP,B,C4,SIM
+          - --ignore=D100,D101,D102,D103,D104,D105,D107,E501
+        stages: [pre-commit]
+
+      # Ruff formatter（可选，与 black 二选一或同时使用）
+      - id: ruff-format
+        name: Ruff formatter
+        args:
+          - --line-length=100
+        stages: [pre-commit]
+
+  # ==================== 类型检查 ====================
+  # mypy - 静态类型检查
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.8.0
+    hooks:
+      - id: mypy
+        name: mypy type checker
+        additional_dependencies:
+          - types-requests
+          - types-toml
+          - types-setuptools
+        args:
+          - --ignore-missing-imports
+          - --show-error-codes
+          - --warn-unused-ignores
+          - --warn-redundant-casts
+          - --warn-unreachable
+          - --strict-equality
+          - --check-untyped-defs
+        stages: [pre-commit]
+        exclude: ^(tests/|projects/|demo\.ipynb|generate\.ipynb)
+
+  # ==================== 安全扫描 ====================
+  # Bandit - 安全漏洞检查
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.7.6
+    hooks:
+      - id: bandit
+        name: Bandit security linter
+        args:
+          - -c
+          - pyproject.toml
+          - -ll
+        additional_dependencies:
+          - bandit[toml]
+        stages: [pre-commit]
+        exclude: ^(tests/|projects/)
+
+  # ==================== Jupyter Notebook 专用检查 ====================
+  # nbstripout - 清除 notebook 输出（可选）
+  - repo: https://github.com/kynan/nbstripout
+    rev: 0.6.1
+    hooks:
+      - id: nbstripout
+        name: Strip notebook outputs
+        stages: [pre-commit]
+        files: \.ipynb$
+        args:
+          - --extra-keys
+          - "metadata.kernelspec metadata.language_info.version"
+
+  # nbQA - 在 notebook 上运行 Python 工具
+  - repo: https://github.com/nbQA-dev/nbQA
+    rev: 1.7.1
+    hooks:
+      # 在 notebook 上运行 isort
+      - id: nbqa-isort
+        name: nbQA isort
+        additional_dependencies:
+          - isort==5.13.2
+        args:
+          - --profile=black
+        stages: [pre-commit]
+
+      # 在 notebook 上运行 ruff
+      - id: nbqa-ruff
+        name: nbQA ruff
+        additional_dependencies:
+          - ruff==0.1.9
+        args:
+          - --fix
+          - --line-length=100
+        stages: [pre-commit]
+
+  # ==================== 其他工具 ====================
+  # pyupgrade - 自动升级 Python 代码到新版本
+  - repo: https://github.com/asottile/pyupgrade
+    rev: v3.15.0
+    hooks:
+      - id: pyupgrade
+        name: pyupgrade Python upgrader
+        args:
+          - --py38-plus
+          - --keep-runtime-typing
+        stages: [pre-commit]
+
+  # autoflake - 移除未使用的 import 和变量
+  - repo: https://github.com/PyCQA/autoflake
+    rev: v2.2.1
+    hooks:
+      - id: autoflake
+        name: autoflake unused imports remover
+        args:
+          - --in-place
+          - --remove-all-unused-imports
+          - --remove-unused-variables
+          - --expand-star-imports
+          - --remove-duplicate-keys
+        stages: [pre-commit]
+
+  # ==================== 自定义本地钩子 ====================
+  # 自定义 Jupyter Notebook 格式检查
+  - repo: local
+    hooks:
+      - id: check-notebook-metadata
+        name: Check notebook metadata
+        entry: python scripts/check_notebook.py
+        language: python
+        files: \.ipynb$
+        pass_filenames: true
+        stages: [pre-commit]
+
+      - id: check-version-sync
+        name: Check version synchronization
+        entry: python scripts/check_version.py
+        language: python
+        pass_filenames: false
+        always_run: true
+        stages: [pre-commit]
+
+# ==================== CI 配置 ====================
+# CI 模式配置（用于 GitHub Actions）
+ci:
+  autofix_commit_msg: |
+    [pre-commit.ci] auto fixes from pre-commit.com hooks
+
+    for more information, see https://pre-commit.ci
+  autofix_prs: true
+  autoupdate_branch: ''
+  autoupdate_commit_msg: '[pre-commit.ci] pre-commit autoupdate'
+  autoupdate_schedule: weekly
+  skip: []
+  submodules: false
