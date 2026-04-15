@@ -1,0 +1,311 @@
+# minGPT CI/CD 流水线
+# 持续集成与代码质量检查
+
+name: CI
+
+on:
+  # 触发条件
+  push:
+    branches:
+      - main
+      - master
+      - develop
+    paths-ignore:
+      - "**.md"
+      - "docs/**"
+      - "*.jpg"
+      - "*.png"
+  pull_request:
+    branches:
+      - main
+      - master
+      - develop
+    paths-ignore:
+      - "**.md"
+      - "docs/**"
+      - "*.jpg"
+      - "*.png"
+  # 允许手动触发
+  workflow_dispatch:
+
+# 权限配置
+permissions:
+  contents: read
+
+# 并发控制
+currency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # ==================== 代码质量检查 ====================
+  lint:
+    name: Code Quality Checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Cache pip packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-lint-${{ hashFiles('pyproject.toml') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-lint-
+            ${{ runner.os }}-pip-
+
+      - name: Install linting tools
+        run: |
+          python -m pip install --upgrade pip
+          pip install black isort ruff mypy bandit[toml]
+
+      # Black 代码格式化检查
+      - name: Check code formatting with Black
+        run: |
+          black --check --diff --line-length=100 mingpt/ tests/ scripts/
+
+      # isort import 排序检查
+      - name: Check import sorting with isort
+        run: |
+          isort --check-only --diff mingpt/ tests/ scripts/
+
+      # Ruff 代码质量检查
+      - name: Lint with Ruff
+        run: |
+          ruff check --output-format=github mingpt/ tests/ scripts/
+
+      # MyPy 类型检查
+      - name: Type check with MyPy
+        run: |
+          mypy --ignore-missing-imports mingpt/
+
+      # Bandit 安全扫描
+      - name: Security scan with Bandit
+        run: |
+          bandit -r mingpt/ -f json -o bandit-report.json || true
+          bandit -r mingpt/ -ll
+
+      # 上传安全扫描报告
+      - name: Upload security scan results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: bandit-security-report
+          path: bandit-report.json
+          retention-days: 30
+
+  # ==================== 多版本测试矩阵 ====================
+  test:
+    name: Test Python ${{ matrix.python-version }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python-version: ["3.8", "3.9", "3.10", "3.11"]
+        include:
+          # 包含 Python 3.12 测试
+          - os: ubuntu-latest
+            python-version: "3.12"
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      # 缓存 pip 依赖
+      - name: Cache pip packages
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cache/pip
+            ~\AppData\Local\pip\Cache
+          key: ${{ runner.os }}-pip-${{ matrix.python-version }}-${{ hashFiles('pyproject.toml') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-${{ matrix.python-version }}-
+            ${{ runner.os }}-pip-
+
+      # 安装依赖
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip setuptools wheel
+          pip install torch --index-url https://download.pytorch.org/whl/cpu
+          pip install -e ".[test]"
+
+      # 运行测试
+      - name: Run tests with pytest
+        run: |
+          pytest -v --tb=short --color=yes
+
+      # 生成覆盖率报告
+      - name: Generate coverage report
+        run: |
+          pytest --cov=mingpt --cov-report=xml --cov-report=html
+
+      # 上传覆盖率报告到 Codecov
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          files: ./coverage.xml
+          flags: unittests
+          env_vars: OS,PYTHON
+          name: codecov-umbrella
+          fail_ci_if_error: false
+          verbose: true
+
+      # 上传覆盖率报告作为 artifact
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report-${{ matrix.os }}-py${{ matrix.python-version }}
+          path: |
+            htmlcov/
+            coverage.xml
+          retention-days: 30
+
+  # ==================== Pre-commit 检查 ====================
+  pre-commit:
+    name: Pre-commit Hooks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Cache pre-commit
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pre-commit
+          key: ${{ runner.os }}-pre-commit-${{ hashFiles('.pre-commit-config.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pre-commit-
+
+      - name: Install pre-commit
+        run: |
+          pip install pre-commit
+
+      - name: Run pre-commit hooks
+        run: |
+          pre-commit run --all-files --show-diff-on-failure
+
+  # ==================== 构建测试 ====================
+  build:
+    name: Build Package
+    runs-on: ubuntu-latest
+    needs: [lint, test]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # 需要完整历史用于 setuptools-scm
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install build tools
+        run: |
+          python -m pip install --upgrade pip
+          pip install build twine check-wheel-contents
+
+      - name: Build package
+        run: |
+          python -m build
+
+      - name: Check package with twine
+        run: |
+          twine check dist/*
+
+      - name: Check wheel contents
+        run: |
+          check-wheel-contents dist/*.whl
+
+      - name: Test installation
+        run: |
+          pip install dist/*.whl
+          python -c "import mingpt; print(f'Successfully installed minGPT')"
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+          retention-days: 7
+
+  # ==================== 依赖安全扫描 ====================
+  security:
+    name: Security Audit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install safety pip-audit
+
+      - name: Run Safety check
+        run: |
+          safety check || true
+
+      - name: Run pip-audit
+        run: |
+          pip-audit --desc || true
+
+  # ==================== 文档构建测试 ====================
+  docs:
+    name: Documentation Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install documentation dependencies
+        run: |
+          pip install -e ".[docs]"
+
+      - name: Build documentation
+        run: |
+          if [ -d "docs" ]; then
+            cd docs
+            make html
+          else
+            echo "No docs directory found, skipping documentation build"
+          fi
+        shell: bash
+
+  # ==================== 完成通知 ====================
+  ci-success:
+    name: CI Success
+    runs-on: ubuntu-latest
+    needs: [lint, test, pre-commit, build, security]
+    if: always() && !contains(needs.*.result, 'failure')
+    steps:
+      - name: CI Success
+        run: |
+          echo "All CI checks passed successfully!"

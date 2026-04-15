@@ -1,0 +1,91 @@
+# minGPT MANIFEST.in
+# 控制哪些文件包含在源代码分发包 (sdist) 中
+
+# ==================== 包含文件 ====================
+
+# 文档文件
+include README.md
+include LICENSE
+include CHANGELOG.md
+include CONTRIBUTING.md
+
+# 配置文件
+include pyproject.toml
+include setup.py
+include .pre-commit-config.yaml
+
+# 类型提示标记文件
+include mingpt/py.typed
+
+# ==================== 递归包含 ====================
+
+# 包含所有 Python 源文件
+recursive-include mingpt *.py
+recursive-include mingpt *.pyi
+
+# 包含测试文件
+recursive-include tests *.py
+
+# 包含项目示例
+recursive-include projects *.py
+recursive-include projects *.md
+
+# 包含脚本
+recursive-include scripts *.py
+
+# 包含文档
+recursive-include docs *.rst *.md *.py
+
+# ==================== 排除文件 ====================
+
+# 排除编译文件
+global-exclude *.pyc
+global-exclude *.pyo
+global-exclude *.pyd
+global-exclude __pycache__
+global-exclude *.so
+global-exclude *.dylib
+global-exclude *.dll
+
+# 排除版本控制
+recursive-exclude * .git
+recursive-exclude * .gitignore
+recursive-exclude * .gitattributes
+
+# 排除 IDE 配置
+recursive-exclude * .idea
+recursive-exclude * .vscode
+recursive-exclude * *.swp
+recursive-exclude * *.swo
+recursive-exclude * *~
+
+# 排除虚拟环境
+recursive-exclude * venv
+recursive-exclude * .venv
+recursive-exclude * env
+recursive-exclude * .env
+recursive-exclude * virtualenv
+
+# 排除构建产物
+recursive-exclude * build
+recursive-exclude * dist
+recursive-exclude * *.egg-info
+recursive-exclude * .eggs
+recursive-exclude * *.egg
+
+# 排除测试和覆盖率
+recursive-exclude * .pytest_cache
+recursive-exclude * .coverage
+recursive-exclude * coverage.xml
+recursive-exclude * htmlcov
+recursive-exclude * .tox
+recursive-exclude * .mypy_cache
+recursive-exclude * .ruff_cache
+
+# 排除 Jupyter 检查点
+recursive-exclude * .ipynb_checkpoints
+
+# 排除其他
+recursive-exclude * node_modules
+recursive-exclude * .DS_Store
+recursive-exclude * Thumbs.db
