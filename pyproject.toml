@@ -1,0 +1,293 @@
+[build-system]
+requires = ["setuptools>=61.0", "setuptools-scm[toml]>=6.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mingpt"
+dynamic = ["version"]
+description = "A PyTorch re-implementation of GPT, both training and inference"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "Andrej Karpathy", email = "andrej.karpathy@gmail.com"}
+]
+maintainers = [
+    {name = "minGPT Contributors"}
+]
+keywords = [
+    "deep-learning",
+    "pytorch",
+    "transformer",
+    "gpt",
+    "language-model",
+    "natural-language-processing",
+    "nlp",
+    "machine-learning",
+    "ai",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Machine Learning",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Typing :: Typed",
+]
+requires-python = ">=3.8"
+dependencies = [
+    "torch>=1.9.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "black>=24.3.0",
+    "isort>=5.13.2",
+    "ruff>=0.3.4",
+    "mypy>=1.9.0",
+    "pre-commit>=3.6.0",
+    "pytest>=7.4.0",
+    "pytest-cov>=4.1.0",
+    "coverage[toml]>=7.4.0",
+    "bump2version>=1.0.1",
+]
+docs = [
+    "sphinx>=7.0.0",
+    "sphinx-rtd-theme>=2.0.0",
+    "myst-parser>=2.0.0",
+]
+all = [
+    "mingpt[dev,docs]",
+]
+
+[project.urls]
+Homepage = "https://github.com/karpathy/minGPT"
+Documentation = "https://github.com/karpathy/minGPT#readme"
+Repository = "https://github.com/karpathy/minGPT.git"
+Issues = "https://github.com/karpathy/minGPT/issues"
+Changelog = "https://github.com/karpathy/minGPT/blob/main/CHANGELOG.md"
+
+[tool.setuptools]
+packages = ["mingpt"]
+
+[tool.setuptools.dynamic]
+version = {attr = "mingpt.__version__"}
+
+[tool.setuptools_scm]
+write_to = "mingpt/_version.py"
+write_to_template = '__version__ = version = "{version}"'
+fallback_version = "0.0.1"
+
+[tool.black]
+line-length = 88
+target-version = ["py38", "py39", "py310", "py311", "py312"]
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+    \.git
+    | \.hg
+    | \.mypy_cache
+    | \.tox
+    | \.venv
+    | _build
+    | buck-out
+    | build
+    | dist
+    | \.ipynb_checkpoints
+)/
+'''
+
+[tool.isort]
+profile = "black"
+line_length = 88
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+ensure_newline_before_comments = true
+skip_gitignore = true
+skip = [".git", ".hg", ".mypy_cache", ".tox", ".venv", "_build", "buck-out", "build", "dist"]
+known_first_party = ["mingpt"]
+sections = ["FUTURE", "STDLIB", "THIRDPARTY", "FIRSTPARTY", "LOCALFOLDER"]
+
+[tool.ruff]
+target-version = "py38"
+line-length = 88
+select = [
+    "E",      # pycodestyle errors
+    "W",      # pycodestyle warnings
+    "F",      # Pyflakes
+    "I",      # isort
+    "B",      # flake8-bugbear
+    "C4",     # flake8-comprehensions
+    "UP",     # pyupgrade
+    "ARG",    # flake8-unused-arguments
+    "SIM",    # flake8-simplify
+    "TCH",    # flake8-type-checking
+    "PTH",    # flake8-use-pathlib
+    "ERA",    # eradicate
+    "RUF",    # Ruff-specific rules
+    "D",      # pydocstyle
+]
+ignore = [
+    "E501",   # line too long (handled by black)
+    "D100",   # missing docstring in public module
+    "D101",   # missing docstring in public class
+    "D102",   # missing docstring in public method
+    "D103",   # missing docstring in public function
+    "D104",   # missing docstring in public package
+    "D105",   # missing docstring in magic method
+    "D107",   # missing docstring in __init__
+    "D203",   # 1 blank line required before class docstring
+    "D213",   # multi-line docstring summary should start at the second line
+    "B008",   # do not perform function calls in argument defaults
+    "B905",   # zip without strict
+    "ARG001", # unused function argument
+    "ARG002", # unused method argument
+]
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".hg",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "venv",
+    "projects",
+]
+
+[tool.ruff.per-file-ignores]
+"tests/*" = ["D", "ARG"]
+"__init__.py" = ["F401"]
+
+[tool.ruff.isort]
+known-first-party = ["mingpt"]
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+disallow_incomplete_defs = false
+check_untyped_defs = true
+disallow_untyped_decorators = false
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_equality = true
+ignore_missing_imports = true
+exclude = [
+    "^projects/",
+    "^tests/",
+    "^build/",
+    "^dist/",
+]
+
+[[tool.mypy.overrides]]
+module = "torch.*"
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = [
+    "-ra",
+    "-q",
+    "--strict-markers",
+    "--strict-config",
+    "--cov=mingpt",
+    "--cov-branch",
+    "--cov-report=term-missing",
+    "--cov-report=xml",
+    "--cov-report=html",
+]
+testpaths = ["tests"]
+pythonpath = ["."]
+filterwarnings = [
+    "ignore::DeprecationWarning",
+    "ignore::UserWarning",
+]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests as integration tests",
+]
+
+[tool.coverage.run]
+source = ["mingpt"]
+branch = true
+parallel = true
+omit = [
+    "tests/*",
+    "projects/*",
+    "*/__pycache__/*",
+    "*/_version.py",
+]
+
+[tool.coverage.paths]
+source = [
+    "mingpt/",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+    "if typing.TYPE_CHECKING:",
+    "@abstractmethod",
+]
+fail_under = 0
+show_missing = true
+skip_covered = true
+
+[tool.coverage.html]
+directory = "htmlcov"
+
+[tool.coverage.xml]
+output = "coverage.xml"
+
+[tool.bumpversion]
+current_version = "0.0.1"
+commit = true
+tag = true
+tag_name = "v{new_version}"
+tag_message = "Bump version: {current_version} → {new_version}"
+allow_dirty = false
+serialize = ["{major}.{minor}.{patch}"]
+
+[[tool.bumpversion.files]]
+filename = "mingpt/__init__.py"
+search = '__version__ = "{current_version}"'
+replace = '__version__ = "{new_version}"'
+
+[[tool.bumpversion.files]]
+filename = "CHANGELOG.md"
+search = "## [Unreleased]"
+replace = """## [Unreleased]
+
+## [{new_version}] - {now:%Y-%m-%d}"""
