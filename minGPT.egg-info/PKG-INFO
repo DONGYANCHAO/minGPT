@@ -1,3 +1,44 @@
+Metadata-Version: 2.4
+Name: minGPT
+Version: 0.0.1
+Summary: A PyTorch re-implementation of GPT
+Author-email: Andrej Karpathy <karpathy@cs.stanford.edu>
+License-Expression: MIT
+Project-URL: Homepage, https://github.com/karpathy/minGPT
+Project-URL: Repository, https://github.com/karpathy/minGPT
+Project-URL: Documentation, https://github.com/karpathy/minGPT/blob/master/README.md
+Project-URL: Issues, https://github.com/karpathy/minGPT/issues
+Keywords: gpt,transformer,pytorch,deep-learning,language-model
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: torch>=1.10.0
+Provides-Extra: dev
+Requires-Dist: black>=24.0; extra == "dev"
+Requires-Dist: isort>=5.13; extra == "dev"
+Requires-Dist: ruff>=0.4; extra == "dev"
+Requires-Dist: mypy>=1.10; extra == "dev"
+Requires-Dist: pre-commit>=3.0; extra == "dev"
+Requires-Dist: pytest>=7.0; extra == "dev"
+Requires-Dist: pytest-cov>=4.0; extra == "dev"
+Requires-Dist: nbqa>=1.8; extra == "dev"
+Requires-Dist: jupyter>=1.0; extra == "dev"
+Provides-Extra: test
+Requires-Dist: pytest>=7.0; extra == "test"
+Requires-Dist: pytest-cov>=4.0; extra == "test"
+Dynamic: license-file
+
 
 # minGPT
 

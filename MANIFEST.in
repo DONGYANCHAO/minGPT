@@ -1,0 +1,16 @@
+include README.md
+include LICENSE
+include pyproject.toml
+include .pre-commit-config.yaml
+
+recursive-include mingpt *.py
+
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]
+recursive-exclude * .gitignore
+recursive-exclude * .git
+
+prune tests
+prune projects
+prune scripts
+prune .github
